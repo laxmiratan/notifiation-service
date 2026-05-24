@@ -1,6 +1,7 @@
 package com.practice.notification_service.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Data
 @Entity
 @Table(name= "notifications")
+@Builder
 public class Notification {
 
     @Id
@@ -28,6 +30,8 @@ public class Notification {
     @Enumerated(EnumType.STRING)
     private NotificationStatus status;
 
+    private int retryCount = 0;
+    private int maxRetry= 3;
     private LocalDateTime nextRetryAt;
 
     @CreationTimestamp
