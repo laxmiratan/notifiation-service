@@ -9,6 +9,6 @@ import java.util.Map;
 public class NotificationRequest {
     private NotificationType type;
     private  String recipientId;
-    private String massagePayload;
+    private String messagePayload;
     private Map<String, String> metadata;
 }

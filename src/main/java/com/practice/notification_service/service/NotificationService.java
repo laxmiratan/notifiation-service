@@ -20,13 +20,11 @@ public class NotificationService {
     private final NotificationFactory factory;
 
     public UUID processNotification(NotificationRequest request){
-        Notification notification = Notification.builder()
-                .type(request.getType())
-                .recipientId(request.getRecipientId())
-                .recipientId(request.getMassagePayload())
-                .status(NotificationStatus.QUEUED)
-                .build();
-
+        Notification notification = new Notification();
+        notification.setRecipientId(request.getRecipientId());
+        notification.setMessagePayload(request.getMessagePayload());
+        notification.setType(request.getType());
+        notification.setStatus(NotificationStatus.QUEUED);
         notification = repository.save(notification);
 
         attemptSend(notification);

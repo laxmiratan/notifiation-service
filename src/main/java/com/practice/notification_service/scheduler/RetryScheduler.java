@@ -20,7 +20,7 @@ public class RetryScheduler {
 
 
 
-    @Scheduled(fixedRate = 600000)
+    @Scheduled(fixedRate = 6000)
     public void processRetries() {
         List<Notification> retryableNotifications = repository
                 .findByStatusAndRetryCountLessThanAndNextRetryAtBefore(
@@ -34,6 +34,8 @@ public class RetryScheduler {
             for (Notification notification : retryableNotifications) {
                 service.attemptSend(notification);
             }
+        }else {
+            System.out.println("No failed message is there");
         }
     }
 }
